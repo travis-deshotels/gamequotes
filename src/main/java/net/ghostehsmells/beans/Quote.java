@@ -1,16 +1,28 @@
 package net.ghostehsmells.beans;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Quote {
+	@Id
+	String id;
 	String quoteText;
-	int id;
-	public Quote(String quoteText, int id) {
-		super();
-		this.quoteText = quoteText;
-		this.id = id;
-	}
+	String game;
 	public Quote() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	public Quote(String id, String quoteText, String game) {
+		super();
+		this.id = id;
+		this.quoteText = quoteText;
+		this.game = game;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getQuoteText() {
 		return quoteText;
@@ -18,21 +30,22 @@ public class Quote {
 	public void setQuoteText(String quoteText) {
 		this.quoteText = quoteText;
 	}
-	public int getId() {
-		return id;
+	public String getGame() {
+		return game;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setGame(String game) {
+		this.game = game;
 	}
 	@Override
 	public String toString() {
-		return "Quote [quoteText=" + quoteText + ", id=" + id + "]";
+		return "Quote [id=" + id + ", quoteText=" + quoteText + ", game=" + game + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((game == null) ? 0 : game.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((quoteText == null) ? 0 : quoteText.hashCode());
 		return result;
 	}
@@ -45,7 +58,15 @@ public class Quote {
 		if (getClass() != obj.getClass())
 			return false;
 		Quote other = (Quote) obj;
-		if (id != other.id)
+		if (game == null) {
+			if (other.game != null)
+				return false;
+		} else if (!game.equals(other.game))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (quoteText == null) {
 			if (other.quoteText != null)

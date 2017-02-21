@@ -6,6 +6,7 @@ import net.ghostehsmells.beans.Quote;
 
 public interface QuoteService {
 	List<Quote> getAllQuotes();
-	Quote getById(int id);
+	Quote getById(String id);
 	void addQuote(Quote quote);
+	List<Quote> findAllByGame(String game); 
 }
