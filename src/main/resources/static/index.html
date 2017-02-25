@@ -2,17 +2,21 @@
 <html ng-app="quoteApp">
 <head><title></title></head>
 <body ng-controller="quoteCtrl as Ctrl">
-<div ng-repeat="quote in quotes">
-	"{{quote.quoteText}}" From: {{quote.game}}
-</div>
+<div>Games with quotes (click them)</div>
+<br>
+ <div ng-repeat="quote in quotes">
+ 	<div ng-click="getQuotesByGamePar(quote.game)">{{quote.game}}</div>
+ </div>
 <br><br>
-Get quotes from a game here!
-<form>
-<input type="text" ng-model="gameText"></input>
-<input type="submit" ng-click="getQuotesByGame()">
 <div ng-repeat="q in quotesByGame">
 	-"{{q.quoteText}}"
 </div>
+<br><br>
+
+<form>
+<input type="text" placeholder="Game" ng-model="newQuote.game">
+<input type="text" placeholder="Quote" ng-model="newQuote.quoteText">
+<div><input type="button" value="Add Quote" ng-click="saveQuote()"></div>
 </form>
 
 <!-- Angular -->
