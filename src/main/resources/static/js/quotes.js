@@ -1,4 +1,4 @@
-var app = angular.module('quoteApp',[]);
+var app = angular.module('quoteApp',['angular.filter']);
 
 app.controller('quoteCtrl', function($scope, $http) {
 	$scope.quotes=[];
@@ -21,10 +21,13 @@ app.controller('quoteCtrl', function($scope, $http) {
 	};
 	
 	$scope.getQuotesByGamePar = function(x) {
-		$http.get("api/quote/game/"+x).then(
+	    // I was saying to use encodeURI this way.
+	    var targetItem = encodeURIComponent(x);
+			$http.get("api/quote/game/" + targetItem).then(
 				//success
 				function(response){
 					$scope.quotesByGame = response.data;
+					$scope.newQuote.game = x;
 				}
 			);		
 	};
@@ -37,6 +40,7 @@ app.controller('quoteCtrl', function($scope, $http) {
 					"quoteText": $scope.newQuote.quoteText,
 					"game": $scope.newQuote.game
 				});
+				$scope.getQuotesByGamePar($scope.newQuote.game);
 				$scope.newQuote={
 					quoteText: '',
 					game: ''

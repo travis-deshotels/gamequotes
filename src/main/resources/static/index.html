@@ -4,8 +4,12 @@
 <body ng-controller="quoteCtrl as Ctrl">
 <div>Games with quotes (click them)</div>
 <br>
- <div ng-repeat="quote in quotes">
- 	<div ng-click="getQuotesByGamePar(quote.game)">{{quote.game}}</div>
+ <div ng-repeat="quote in quotes | unique: 'game' | orderBy:'game'">
+   <div ng-click="getQuotesByGamePar(quote.game)">
+     <div>
+       <div>{{quote.game}}</div>
+     </div>
+   </div>
  </div>
 <br><br>
 <div ng-repeat="q in quotesByGame">
@@ -21,6 +25,7 @@
 
 <!-- Angular -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
 <script type="text/javascript" src="js/quotes.js"></script>
 </body>
 </html>
